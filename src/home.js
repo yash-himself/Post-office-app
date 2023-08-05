@@ -5,9 +5,12 @@ let ipAddress = sessionStorage.getItem('ip')
 
 
 
-// integreting map
-mapBox.innerHTML = ` <h2 style="color:rgb(164, 154, 210);"> Your Current Location</h2>
- <iframe src="https://maps.google.com/maps?q=${locations[0]}, ${locations[1]}&z=15&output=embed" width="60%" height="400px" frameborder="0" style="border:0"></iframe>`
+navigator.geolocation.getCurrentPosition(position =>{
+    const {latitude, longitude} = position.coords;
+    document.getElementById('lat').innerHTML=`Lat: ${latitude}`
+    document.getElementById('long').innerHTML=`Long: ${longitude}`
+    document.getElementById('iFrame').src = `https://maps.google.com/maps?q=${latitude}, ${longitude}&z=15&output=embed`
+})
 
 
 
@@ -23,12 +26,12 @@ fetch("https://ipinfo.io/json?token=c7e374e3ab331a").then(
     <h2 style="color: gray;">IP Address: <span style="color: aliceblue;" id="ipAdd">${ipAddress} </span></h2>
     <div class="infoBox">
         <div style="margin-top: 20px; display: flex;justify-content: space-between; color: gray;">
-            <p>Lat: ${locations[0]}</p>
+            <p id="lat">  </p>
             <p>City: ${data.city}</p>
             <p>Organisation: ${data.org}</p>
             </div>
         <div style="margin-top: 10px; display: flex;justify-content: space-between; color: gray;">
-            <p>Long: ${locations[1]}</p>
+            <p id="long">  </p>
             <p>Region: ${data.region}, ${data.country}</p>
             <p>Hostname: ${window.location.hostname}</p>
         </div>
