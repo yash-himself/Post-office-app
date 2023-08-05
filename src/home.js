@@ -5,12 +5,6 @@ let ipAddress = sessionStorage.getItem('ip')
 
 
 
-navigator.geolocation.getCurrentPosition(position =>{
-    const {latitude, longitude} = position.coords;
-    document.getElementById('lat').innerHTML=`Lat: ${latitude}`
-    document.getElementById('long').innerHTML=`Long: ${longitude}`
-    document.getElementById('iFrame').src = `https://maps.google.com/maps?q=${latitude}, ${longitude}&z=15&output=embed`
-})
 
 
 
@@ -38,6 +32,13 @@ fetch("https://ipinfo.io/json?token=c7e374e3ab331a").then(
     </div>
     
     `
+        navigator.geolocation.getCurrentPosition(position =>{
+    const {latitude, longitude} = position.coords;
+    document.getElementById('lat').innerHTML=`Lat: ${latitude}`
+    document.getElementById('long').innerHTML=`Long: ${longitude}`
+    document.getElementById('iFrame').src = `https://maps.google.com/maps?q=${latitude}, ${longitude}&z=15&output=embed`
+})
+
         let date  = new Date().toLocaleString("en-US", { timeZone: data.timezone });
 
         let moreInfo = document.getElementById('moreInfo')
